@@ -1,13 +1,15 @@
-const Article = ({name, institution, personalStatement}) => {
+import "./Article.css";
+
+const Article = (props) => {
   return (
     <div className="Article">
       <div className="head">
         <p>
-          {name} | {institution}
+          {props.firstName} | {props.institution}
         </p>
       </div>
       <div className="body">
-        <p>"{personalStatement}"</p>
+        <p>"{props.personalStatement}"</p>
       </div>
     </div>
   );

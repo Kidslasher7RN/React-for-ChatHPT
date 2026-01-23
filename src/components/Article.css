@@ -1,0 +1,17 @@
+.Article {
+  background-color: gray;
+  border-radius: 3px;
+  max-width: 30%;
+  padding: 0.1rem 1rem;
+  margin: 1rem;
+}
+
+.head {
+  font-family: sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.body {
+  text-align: justify;
+}
