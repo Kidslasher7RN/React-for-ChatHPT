@@ -1,26 +1,25 @@
 import dummyDb from "../db.json";
 import Article from "../components/Article";
+import Search from "../components/Search";
+import {useState} from "react";
 
 const Homepage = () => {
-  function onSearch(e) {
-    console.log(e.currentTarget);
+  const [posts, setPosts] = useState(dummyDb);
+
+  function filterByName(key) {
+    setPosts(
+      dummyDb.filter((data) => data.firstName.toLowerCase().includes(key)),
+    );
   }
 
   return (
     <>
       <h1>Ivy's Words</h1>
-      <div className="search-container">
-        Search by Name : <input type="text" onChange={onSearch} />
-      </div>
+      <Search onChange={filterByName} />
       <div className="Article-Container">
-        {dummyDb.map(({firstName, institution, personalStatement}, index) => {
-          return (
-            <Article
-              {...{firstName, institution, personalStatement}}
-              key={index}
-            />
-          );
-        })}
+        {posts.map((props, index) => (
+          <Article {...props} key={index} />
+        ))}
       </div>
     </>
   );
