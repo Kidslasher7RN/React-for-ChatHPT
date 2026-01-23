@@ -86,11 +86,17 @@ function App() {
     <>
       <div className="App">
         {/* <Navbar /> */}
-        <Article
-          name={ivyLeagueStudents.firstName}
-          institution={ivyLeagueStudents.institution}
-          personalStatement={ivyLeagueStudents.personalStatement}
-        />
+        <div className="Article-Container">
+          {ivyLeagueStudents.map((student) => {
+            return (
+              <Article
+                name={student.firstName}
+                institution={student.institution}
+                personalStatement={student.personalStatement}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
