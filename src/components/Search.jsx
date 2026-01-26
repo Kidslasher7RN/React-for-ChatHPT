@@ -16,7 +16,9 @@ const Search = (props) => {
     <div className="search-container">
       Search by Name : <input type="text" onChange={onSearchChange} />
       <p>
-        ditemukan {props.totalPost} hasil untuk "{search}"
+        {props.totalPosts == props.postsLength
+          ? "semua hasil"
+          : `ditemukan ${props.totalPosts} hasil untuk "${search}"`}
       </p>
     </div>
   );
