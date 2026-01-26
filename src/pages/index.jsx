@@ -5,17 +5,21 @@ import {useState} from "react";
 
 const Homepage = () => {
   const [posts, setPosts] = useState(dummyDb);
+  const [totalPost, setTotalPost] = useState(dummyDb.length);
 
   function filterByName(key) {
-    setPosts(
-      dummyDb.filter((data) => data.firstName.toLowerCase().includes(key)),
+    const filterdData = dummyDb.filter((data) =>
+      data.firstName.toLowerCase().includes(key.toLowerCase()),
     );
+
+    setTotalPost(filterdData.length);
+    setPosts(filterdData);
   }
 
   return (
     <>
       <h1>Ivy's Words</h1>
-      <Search onChange={filterByName} />
+      <Search onChange={filterByName} totalPost={totalPost} />
       <div className="Article-Container">
         {posts.map((props, index) => (
           <Article {...props} key={index} />
