@@ -1,6 +1,7 @@
 import dummyDb from "../db.json";
 import Article from "../components/Article";
 import Search from "../components/Search";
+import Dummy from "../components/Dummy";
 import {useState} from "react";
 
 const Homepage = () => {
@@ -20,7 +21,7 @@ const Homepage = () => {
     <>
       <h1>Ivy's Words</h1>
       <Search
-        onChange={filterByName}
+        filterSearch={filterByName}
         totalPosts={totalPosts}
         postsLength={dummyDb.length}
       />
@@ -29,6 +30,7 @@ const Homepage = () => {
           <Article {...props} key={index} />
         ))}
       </div>
+      <Dummy />
     </>
   );
 };
