@@ -1,10 +1,11 @@
 import {useState} from "react";
 
-function Dummy() {
+function Dummy({dummyFunc}) {
   const [text, setText] = useState("h9");
 
   function handleClick(e, name) {
     text == "h9" ? setText(name) : setText("h9");
+    dummyFunc(text);
   }
 
   return (

@@ -2,7 +2,7 @@ import dummyDb from "../db.json";
 import Article from "../components/Article";
 import Search from "../components/Search";
 import Dummy from "../components/Dummy";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 const Homepage = () => {
   const [posts, setPosts] = useState(dummyDb);
@@ -17,6 +17,19 @@ const Homepage = () => {
     setPosts(filterdData);
   }
 
+  const [dummyState, setDummyState] = useState(<Dummy dummyFunc={dummyFunc} />);
+  function dummyFunc(value) {
+    setDummyState(value);
+  }
+
+  useEffect(() => {
+    console.log("hello world");
+
+    return () => {
+      console.log("clean up");
+    };
+  }, [dummyState]);
+
   return (
     <>
       <h1>Ivy's Words</h1>
@@ -30,7 +43,7 @@ const Homepage = () => {
           <Article {...props} key={index} />
         ))}
       </div>
-      <Dummy />
+      {dummyState}
     </>
   );
 };
