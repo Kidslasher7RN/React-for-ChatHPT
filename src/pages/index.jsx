@@ -49,21 +49,11 @@ const Homepage = () => {
     console.log("dummy state changed");
   }, [dummyState]);
 
-  const [userAccount, setUserAccount] = useState("N/A");
-  const [isOnline, setIsOnline] = useState("offline");
 
-  useEffect(() => {
-    setUserAccount("rick");
-    setIsOnline("online");
-  }, []);
 
   return (
     <>
-      <userState.Provider
-        value={{userAccount, setUserAccount, isOnline, setIsOnline}}
-      >
-        <Navbar />
-      </userState.Provider>
+   
 
       <h1>Ivy's Words</h1>
       <Search

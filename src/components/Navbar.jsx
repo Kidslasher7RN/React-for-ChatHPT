@@ -2,6 +2,7 @@ import {useContext} from "react";
 import {userState} from "../context/userState";
 import "./Navbar.css";
 
+import {Link} from "react-router-dom";
 const Navbar = () => {
   const {userAccount, isOnline} = useContext(userState);
 
@@ -13,8 +14,14 @@ const Navbar = () => {
       </div>
 
       <ul className="nav-links">
-        <li>Home</li>
-        <li>About</li>
+        <Link to="/">
+          <li>Home</li>
+        </Link>
+        <Link to="/about">
+          {" "}
+          <li>About</li>
+        </Link>
+
         <li>Order</li>
       </ul>
     </nav>
