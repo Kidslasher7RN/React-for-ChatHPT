@@ -1,12 +1,19 @@
 import dummyDb from "../db.json";
 import Article from "../components/Article";
+import FakeArticle from "../components/fakeAPIArticle";
 import Search from "../components/Search";
 import Dummy from "../components/Dummy";
 import {useState, useEffect} from "react";
 
+import "./Index.css";
+import Navbar from "../components/Navbar";
+
+import {userState} from "../context/userState";
+
 const Homepage = () => {
   const [posts, setPosts] = useState(dummyDb);
   const [totalPosts, setTotalPosts] = useState(dummyDb.length);
+  const [fakeAPI, setFakeAPI] = useState([]);
 
   function filterByName(key) {
     const filterdData = dummyDb.filter((data) =>
@@ -17,21 +24,47 @@ const Homepage = () => {
     setPosts(filterdData);
   }
 
-  const [dummyState, setDummyState] = useState(<Dummy dummyFunc={dummyFunc} />);
+  const [dummyState, setDummyState] = useState(false);
   function dummyFunc(value) {
     setDummyState(value);
   }
 
-  useEffect(() => {
-    console.log("hello world");
+  function toggleDummy() {
+    console.log(fakeAPI);
+    if (dummyState) {
+      setDummyState(false);
+    } else {
+      setDummyState(true);
+    }
+  }
 
-    return () => {
-      console.log("clean up");
-    };
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts/")
+      .then((res) => res.json())
+      .then((data) => setFakeAPI(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    console.log("dummy state changed");
   }, [dummyState]);
+
+  const [userAccount, setUserAccount] = useState("N/A");
+  const [isOnline, setIsOnline] = useState("offline");
+
+  useEffect(() => {
+    setUserAccount("rick");
+    setIsOnline("online");
+  }, []);
 
   return (
     <>
+      <userState.Provider
+        value={{userAccount, setUserAccount, isOnline, setIsOnline}}
+      >
+        <Navbar />
+      </userState.Provider>
+
       <h1>Ivy's Words</h1>
       <Search
         filterSearch={filterByName}
@@ -39,11 +72,16 @@ const Homepage = () => {
         postsLength={dummyDb.length}
       />
       <div className="Article-Container">
-        {posts.map((props, index) => (
-          <Article {...props} key={index} />
+        {posts.map((props) => (
+          <Article {...props} key={props.id} />
+        ))}
+        {fakeAPI.map((props, index) => (
+          <FakeArticle {...props} key={index} />
         ))}
       </div>
-      {dummyState}
+      <button onClick={toggleDummy}>toggle dummy</button>
+
+      {dummyState && <Dummy dummyFunc={dummyFunc} />}
     </>
   );
 };

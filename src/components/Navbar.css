@@ -1,0 +1,79 @@
+/* Reset small defaults */
+#navbar * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar container */
+#navbar {
+  height: 64px;
+  padding: 0 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #0f172a; /* slate-900 */
+  color: #f8fafc; /* slate-50 */
+
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Left profile section */
+.nav-profile {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nav-profile p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.nav-profile small {
+  font-size: 0.75rem;
+  color: #ffffff; /* green = online */
+}
+
+/* Right navigation links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Each nav item */
+.nav-links li {
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #cbd5f5;
+
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect */
+.nav-links li:hover {
+  color: #ffffff;
+}
+
+/* Underline animation */
+.nav-links li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+
+  width: 0%;
+  height: 2px;
+  background-color: #6366f1; /* indigo */
+
+  transition: width 0.2s ease;
+}
+
+.nav-links li:hover::after {
+  width: 100%;
+}

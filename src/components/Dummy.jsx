@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 function Dummy({dummyFunc}) {
   const [text, setText] = useState("h9");
@@ -7,6 +7,13 @@ function Dummy({dummyFunc}) {
     text == "h9" ? setText(name) : setText("h9");
     dummyFunc(text);
   }
+
+  useEffect(() => {
+    console.log("dummy mounted");
+    return () => {
+      console.log("clean up");
+    };
+  }, []);
 
   return (
     <div>
